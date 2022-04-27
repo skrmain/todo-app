@@ -1,0 +1,43 @@
+<h2 class="text-center p-3">Signup, here</h2>
+<form [formGroup]="signupform" (submit)="signupUser()">
+  <p class="form-group">
+    <label for="name">Name :</label>
+    <input type="text" id="name" class="form-control" formControlName="name" />
+  </p>
+  <p class="form-group">
+    <label for="email">Email :</label>
+    <input
+      type="email"
+      id="email"
+      class="form-control"
+      formControlName="email"
+    />
+  </p>
+  <p class="form-group">
+    <label for="profilePic" class="">Profile Pic: </label>
+    <input
+      type="file"
+      id="profilePic"
+      class="form-control"
+      name="profile"
+      (change)="onFileSelect($event)"
+    />
+  </p>
+  <p>
+    <label for="password">Password :</label>
+    <input
+      type="password"
+      id="password"
+      class="form-control"
+      formControlName="password"
+    />
+  </p>
+  <p class="text-center mt-5">
+    <input
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="signupform.invalid"
+      value="Signup"
+    />
+  </p>
+</form>

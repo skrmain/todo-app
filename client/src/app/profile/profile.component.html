@@ -1,0 +1,19 @@
+<h2 class="text-center">My Profile</h2>
+<div class="row mt-5" *ngIf="user">
+  <div class="col-4 rounded">
+    <img
+      class="shadow rounded"
+      src="{{ baseUrl + user.userPicPath }}"
+      alt="User Pic"
+    />
+  </div>
+  <div class="col-8">
+    <p><b>Name :</b> {{ user.name }}</p>
+    <p><b>Email :</b> {{ user.email }}</p>
+    <p class="mt-4">
+      <button (click)="deleteUser(user._id)" class="btn btn-danger">
+        Delete Account
+      </button>
+    </p>
+  </div>
+</div>
