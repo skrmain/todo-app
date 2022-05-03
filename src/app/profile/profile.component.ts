@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService } from "../auth.service";
-// import { Router } from "@angular/router";
 import { Title } from "@angular/platform-browser";
+
+import { AuthService } from "../auth.service";
 
 @Component({
   selector: "app-userdetail",
@@ -9,17 +9,11 @@ import { Title } from "@angular/platform-browser";
   styleUrls: ["./profile.component.css"],
 })
 export class ProfileComponent implements OnInit {
-  constructor(
-    private authService: AuthService,
-    // private router: Router,
-    private title: Title
-  ) {}
-
-  baseUrl = "http://localhost:3000/pic/";
+  constructor(private authService: AuthService, private title: Title) {}
 
   user: any;
   ngOnInit() {
-    this.title.setTitle("Profile | NoteApp");
+    this.title.setTitle("Profile | Angular-NoteApp");
     this.getUserDetail();
   }
 
@@ -28,15 +22,4 @@ export class ProfileComponent implements OnInit {
       this.user = result.data;
     });
   }
-
-  // deleteUser(userId) {
-  //   let response = confirm("Do You really want to Delete Account?");
-  //   if (response) {
-  //     this.authService.deleteUser(userId).subscribe(result => {
-  //       this.authService.logoutUser();
-  //       alert("Account Deleted");
-  //       this.router.navigate(["/login"]);
-  //     });
-  //   }
-  // }
 }

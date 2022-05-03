@@ -1,9 +1,11 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { TodoComponent } from "./todo/todo.component";
+
+import { NotesComponent } from "./notes/notes.component";
 import { LoginComponent } from "./login/login.component";
 import { SignupComponent } from "./signup/signup.component";
 import { ProfileComponent } from "./profile/profile.component";
+
 import { AuthGuard } from "./auth.guard";
 
 const routes: Routes = [
@@ -14,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: "notes",
-    component: TodoComponent,
+    component: NotesComponent,
     canActivate: [AuthGuard],
   },
   {

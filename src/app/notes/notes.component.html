@@ -1,0 +1,54 @@
+<form [formGroup]="noteForm" (submit)="saveMessage()" class="mt-4">
+  <div class="form-group row">
+    <div class="col-10 input-group-lg">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Title"
+        formControlName="title"
+        aria-describedby="inputGroup-sizing-lg"
+      />
+    </div>
+    <div class="col-10 input-group-lg">
+      <textarea
+        type="text"
+        class="form-control"
+        placeholder="Detail"
+        formControlName="detail"
+        aria-describedby="inputGroup-sizing-lg"
+      ></textarea>
+    </div>
+    <div class="col-2">
+      <button
+        type="submit"
+        class="btn btn-outline-success rounded-circle d-block p-2"
+      >
+        <span
+          class="material-icons"
+          style="vertical-align: middle; font-size: 2.5em; font-weight: bold"
+          >add</span
+        >
+      </button>
+    </div>
+  </div>
+</form>
+<div class="mt-5">
+  <h2>Notes</h2>
+  <ul class="p-3" *ngIf="notes.length">
+    <li
+      *ngFor="let note of notes"
+      class="row m-2 p-2 bg-white border align-items-center"
+    >
+      <span class="col-12">{{ note.title }}</span>
+      <div class="col-8">
+        <pre>{{ note.detail }}</pre>
+      </div>
+      <span class="col-3">
+        <button class="btn btn-outline-danger" (click)="deleteNote(note._id)">
+          <span class="material-icons">delete</span>
+        </button>
+      </span>
+    </li>
+  </ul>
+  <p *ngIf="!notes.length" class="text-center mt-5">No Note</p>
+</div>

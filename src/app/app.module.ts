@@ -7,13 +7,13 @@ import { AppComponent } from "./app.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { LoginComponent } from "./login/login.component";
 import { SignupComponent } from "./signup/signup.component";
-import { TodoComponent } from "./todo/todo.component";
+import { NotesComponent } from "./notes/notes.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { AuthService } from "./auth.service";
 import { AuthGuard } from "./auth.guard";
-import { TodoService } from "./todo.service";
+import { NotesService } from "./notes.service";
 import { TokenIncreptorService } from "./token-increptor.service";
 
 @NgModule({
@@ -21,26 +21,26 @@ import { TokenIncreptorService } from "./token-increptor.service";
     AppComponent,
     LoginComponent,
     SignupComponent,
-    TodoComponent,
+    NotesComponent,
     NavbarComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     AuthService,
     AuthGuard,
-    TodoService,
+    NotesService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenIncreptorService,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

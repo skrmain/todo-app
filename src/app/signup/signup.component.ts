@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
 import { Title } from "@angular/platform-browser";
+
+import { AuthService } from "../auth.service";
 
 @Component({
   selector: "app-signup",
@@ -10,11 +11,10 @@ import { Title } from "@angular/platform-browser";
   styleUrls: ["./signup.component.css"],
 })
 export class SignupComponent implements OnInit {
-  signupform = this.fb.group({
+  signupForm = this.fb.group({
     username: ["", [Validators.required, Validators.minLength(3)]],
     email: ["", [Validators.required, Validators.email]],
-    password: ["", [Validators.required, Validators.minLength(3)]],
-    // userPic: ["", [Validators.required]]
+    password: ["", [Validators.required, Validators.minLength(6)]],
   });
   constructor(
     private fb: FormBuilder,
@@ -24,33 +24,12 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.title.setTitle("SignUp | TodoApp");
+    this.title.setTitle("SignUp | Angular-NoteApp");
   }
-
-  // // run when file field changes
-  // onFileSelect(event) {
-  //   if (event.target.files.length > 0) {
-  //     const file = event.target.files[0];
-  //     this.signupform.get("userPic").setValue(file);
-  //   }
-  // }
 
   // to call the addUser Service
   signupUser() {
-    let user = this.signupform.value;
-    const data = {
-      username: user.username,
-      email: user.email,
-      password: user.password,
-    };
-    // let formData = new FormData();
-
-    // formData.append("name", user.name);
-    // formData.append("email", user.email);
-    // formData.append("password", user.password);
-    // formData.append("userPic", user.userPic);
-
-    this.authService.signupUser(data).subscribe((result) => {
+    this.authService.signupUser(this.signupForm.value).subscribe((result) => {
       this.router.navigate(["/login"]);
     });
   }

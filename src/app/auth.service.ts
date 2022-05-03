@@ -23,24 +23,19 @@ export class AuthService {
     return this.http.get(this.baseURL + "user");
   }
 
-  // // delete user account
-  // deleteUser(userId) {
-  //   return this.http.delete(this.baseURL + "user/" + userId);
-  // }
-
   // logout user
   logoutUser() {
-    localStorage.removeItem("token");
+    localStorage.removeItem("auth_token");
     return true;
   }
 
   // send the token
   getToken() {
-    return localStorage.getItem("token");
+    return localStorage.getItem("auth_token");
   }
 
   // check token exists or Not
   isLoggedIn() {
-    return !!localStorage.getItem("token");
+    return !!localStorage.getItem("auth_token");
   }
 }

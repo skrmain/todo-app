@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {}
 
-  title = document.title;
+  title = "Angular-NoteApp";
 
   checkLogin() {
     return this.authService.isLoggedIn();

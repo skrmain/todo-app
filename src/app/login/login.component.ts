@@ -17,24 +17,24 @@ export class LoginComponent implements OnInit {
     private title: Title
   ) {}
 
-  loginform = this.fb.group({
+  loginForm = this.fb.group({
     email: ["", [Validators.required, Validators.email]],
     password: ["", [Validators.required]],
   });
   ngOnInit() {
-    this.title.setTitle("Login | TodoApp");
+    this.title.setTitle("Login | Angular-NoteApp");
   }
 
   loginUser() {
     this.authService
-      .loginUser(this.loginform.value)
+      .loginUser(this.loginForm.value)
       .subscribe((result: any) => {
         if (result.data.token) {
-          localStorage.setItem("token", result.data.token);
+          localStorage.setItem("auth_token", result.data.token);
           this.router.navigate(["/"]);
         } else {
           alert("Error in Login");
-          this.loginform.reset();
+          this.loginForm.reset();
         }
       });
   }

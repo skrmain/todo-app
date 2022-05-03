@@ -4,22 +4,19 @@ import { HttpClient } from "@angular/common/http";
 @Injectable({
   providedIn: "root",
 })
-export class TodoService {
+export class NotesService {
   constructor(private http: HttpClient) {}
   baseURL = "http://localhost:8000/api";
 
-  getTodos() {
+  getNotes() {
     return this.http.get(this.baseURL + "/note");
   }
 
-  addTodo(message) {
-    return this.http.post(this.baseURL + "/note", {
-      title: message,
-      detail: "Empty",
-    });
+  addNote(data) {
+    return this.http.post(this.baseURL + "/note", data);
   }
 
-  deleteTodo(todo_id) {
-    return this.http.delete(this.baseURL + "/note/" + todo_id);
+  deleteNote(noteId) {
+    return this.http.delete(this.baseURL + "/note/" + noteId);
   }
 }
