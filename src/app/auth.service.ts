@@ -2,15 +2,15 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
-  baseURL = "http://localhost:3000/";
+  baseURL = "http://localhost:8000/api/";
 
   // add new user
   signupUser(user) {
-    return this.http.post(this.baseURL + "user/signup", user);
+    return this.http.post(this.baseURL + "user/register", user);
   }
 
   // login user
@@ -23,10 +23,10 @@ export class AuthService {
     return this.http.get(this.baseURL + "user");
   }
 
-  // delete user account
-  deleteUser(userId) {
-    return this.http.delete(this.baseURL + "user/" + userId);
-  }
+  // // delete user account
+  // deleteUser(userId) {
+  //   return this.http.delete(this.baseURL + "user/" + userId);
+  // }
 
   // logout user
   logoutUser() {

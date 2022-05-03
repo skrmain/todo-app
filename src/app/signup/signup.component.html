@@ -1,8 +1,13 @@
 <h2 class="text-center p-3">Signup, here</h2>
 <form [formGroup]="signupform" (submit)="signupUser()">
   <p class="form-group">
-    <label for="name">Name :</label>
-    <input type="text" id="name" class="form-control" formControlName="name" />
+    <label for="name">Username :</label>
+    <input
+      type="text"
+      id="username"
+      class="form-control"
+      formControlName="username"
+    />
   </p>
   <p class="form-group">
     <label for="email">Email :</label>
@@ -13,7 +18,7 @@
       formControlName="email"
     />
   </p>
-  <p class="form-group">
+  <!-- <p class="form-group">
     <label for="profilePic" class="">Profile Pic: </label>
     <input
       type="file"
@@ -22,7 +27,7 @@
       name="profile"
       (change)="onFileSelect($event)"
     />
-  </p>
+  </p> -->
   <p>
     <label for="password">Password :</label>
     <input

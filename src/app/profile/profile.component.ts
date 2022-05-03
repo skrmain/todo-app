@@ -1,17 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../auth.service";
-import { Router } from "@angular/router";
+// import { Router } from "@angular/router";
 import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-userdetail",
   templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.css"]
+  styleUrls: ["./profile.component.css"],
 })
 export class ProfileComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private router: Router,
+    // private router: Router,
     private title: Title
   ) {}
 
@@ -19,25 +19,24 @@ export class ProfileComponent implements OnInit {
 
   user: any;
   ngOnInit() {
-    this.title.setTitle("Profile | TodoApp");
+    this.title.setTitle("Profile | NoteApp");
     this.getUserDetail();
   }
 
   getUserDetail() {
-    this.authService.getUserDetail().subscribe(user => {
-      console.log("User : ", user);
-      this.user = user;
+    this.authService.getUserDetail().subscribe((result: any) => {
+      this.user = result.data;
     });
   }
 
-  deleteUser(userId) {
-    let response = confirm("Do You really want to Delete Account?");
-    if (response) {
-      this.authService.deleteUser(userId).subscribe(result => {
-        this.authService.logoutUser();
-        alert("Account Deleted");
-        this.router.navigate(["/login"]);
-      });
-    }
-  }
+  // deleteUser(userId) {
+  //   let response = confirm("Do You really want to Delete Account?");
+  //   if (response) {
+  //     this.authService.deleteUser(userId).subscribe(result => {
+  //       this.authService.logoutUser();
+  //       alert("Account Deleted");
+  //       this.router.navigate(["/login"]);
+  //     });
+  //   }
+  // }
 }

@@ -16,7 +16,7 @@
       >
         <span
           class="material-icons"
-          style="vertical-align: middle;font-size: 2.5em;font-weight: bold;"
+          style="vertical-align: middle; font-size: 2.5em; font-weight: bold"
           >add</span
         >
       </button>
@@ -30,7 +30,7 @@
       *ngFor="let todo of todos"
       class="row m-2 p-2 bg-white border align-items-center"
     >
-      <span class="col-9">{{ todo.message }}</span>
+      <span class="col-9">{{ todo.title }}</span>
       <span class="col-3">
         <button class="btn btn-outline-danger" (click)="deleteTodo(todo._id)">
           <span class="material-icons">delete</span>
