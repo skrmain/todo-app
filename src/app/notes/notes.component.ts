@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
-import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl } from "@angular/forms";
 import { NotesService } from "../notes.service";
 import { Title } from "@angular/platform-browser";
 
@@ -11,17 +11,17 @@ import { Title } from "@angular/platform-browser";
 })
 export class NotesComponent implements OnInit {
   notes: any = [];
-  noteForm: FormGroup;
+  noteForm: UntypedFormGroup;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private noteService: NotesService,
     private title: Title
   ) {}
   ngOnInit() {
     this.title.setTitle("Notes | Angular-NoteApp");
     this.noteForm = this.formBuilder.group({
-      title: new FormControl(),
-      detail: new FormControl(),
+      title: new UntypedFormControl(),
+      detail: new UntypedFormControl(),
     });
     this.getNotes();
   }
