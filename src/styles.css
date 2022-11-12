@@ -1,6 +1,7 @@
 * {
   font-family: sans-serif;
 }
+
 body {
   background-color: rgb(216, 216, 216);
 }
@@ -13,6 +14,6 @@ input.ng-valid.ng-touched {
   border: 1.9px solid green;
 }
 
-:disabled{
+:disabled {
   cursor: not-allowed;
 }

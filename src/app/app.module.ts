@@ -14,7 +14,7 @@ import { ProfileComponent } from "./profile/profile.component";
 import { AuthService } from "./auth.service";
 import { AuthGuard } from "./auth.guard";
 import { NotesService } from "./notes.service";
-import { TokenIncreptorService } from "./token-increptor.service";
+import { TokenInterceptorService } from "./token-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -37,7 +37,7 @@ import { TokenIncreptorService } from "./token-increptor.service";
     NotesService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenIncreptorService,
+      useClass: TokenInterceptorService,
       multi: true,
     },
   ],
