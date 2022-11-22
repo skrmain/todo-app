@@ -13,7 +13,5 @@ services:
     image: skrmain/expressjs-todo-api:0.1
     ports:
       - 8000:8000
-    # volumes:
-    #   - ./:/app/
     environment:
       - MONGODB_URL=mongodb://admin:admin@mongo:27017/
