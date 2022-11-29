@@ -1,4 +1,13 @@
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
+<app-navbar></app-navbar>
+
+<div class="mt-5 p-5">
+  <div class="row justify-content-center">
+    <div class="py-3 px-4 col-12 col-sm-10 col-md-6 col-lg-4 bg-light rounded">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
 
 <form [formGroup]="todoForm" (ngSubmit)="addTodo()">
   <p>
