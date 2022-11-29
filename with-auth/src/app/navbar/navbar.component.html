@@ -1,0 +1,31 @@
+<nav
+  class="navbar fixed-top navbar-expand navbar-dark shadow"
+  style="background-color: rgb(35, 104, 255)"
+>
+  <a class="navbar-brand">{{ title }}</a>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item ml-2" *ngIf="!checkLogin()">
+      <a class="nav-link" routerLinkActive="active" [routerLink]="['/login']"
+        >Login</a
+      >
+    </li>
+    <li class="nav-item ml-2" *ngIf="!checkLogin()">
+      <a class="nav-link" routerLinkActive="active" [routerLink]="['/signup']"
+        >Signup</a
+      >
+    </li>
+    <li class="nav-item ml-2" *ngIf="checkLogin()">
+      <a class="nav-link" routerLinkActive="active" [routerLink]="['/profile']"
+        >Profile</a
+      >
+    </li>
+    <li class="nav-item ml-2" *ngIf="checkLogin()">
+      <a class="nav-link" routerLinkActive="active" [routerLink]="['/notes']"
+        >Notes</a
+      >
+    </li>
+    <li class="nav-item ml-2" *ngIf="checkLogin()">
+      <button class="btn btn-danger" (click)="logoutUser()">Logout</button>
+    </li>
+  </ul>
+</nav>

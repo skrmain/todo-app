@@ -1,0 +1,19 @@
+* {
+  font-family: sans-serif;
+}
+
+body {
+  background-color: rgb(216, 216, 216);
+}
+
+input.ng-invalid.ng-touched {
+  border: 1.9px solid red;
+}
+
+input.ng-valid.ng-touched {
+  border: 1.9px solid green;
+}
+
+:disabled {
+  cursor: not-allowed;
+}
