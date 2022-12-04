@@ -5,19 +5,19 @@ import { environment } from "src/environments/environment";
 @Injectable({
   providedIn: "root",
 })
-export class NotesService {
+export class TodoService {
   constructor(private http: HttpClient) {}
   baseURL = environment.apiUrl;
 
-  getNotes() {
-    return this.http.get(this.baseURL + "note");
+  getTodos() {
+    return this.http.get(this.baseURL + "todo");
   }
 
-  addNote(data) {
-    return this.http.post(this.baseURL + "note", data);
+  addTodo(data: any) {
+    return this.http.post(this.baseURL + "todo", data);
   }
 
-  deleteNote(noteId) {
-    return this.http.delete(this.baseURL + "note/" + noteId);
+  deleteTodo(id: any) {
+    return this.http.delete(this.baseURL + "todo/" + id);
   }
 }

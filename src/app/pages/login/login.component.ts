@@ -1,18 +1,17 @@
 import { Component, OnInit } from "@angular/core";
-import { UntypedFormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Title } from "@angular/platform-browser";
 
-import { AuthService } from "../auth.service";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
   constructor(
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
     private title: Title
@@ -23,7 +22,7 @@ export class LoginComponent implements OnInit {
     password: ["", [Validators.required]],
   });
   ngOnInit() {
-    this.title.setTitle("Login | Angular-NoteApp");
+    this.title.setTitle("Login | Angular-TodoApp");
   }
 
   loginUser() {

@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
-import { LoginComponent } from './login/login.component';
-import { NotesComponent } from './notes/notes.component';
-import { ProfileComponent } from './profile/profile.component';
-import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './pages/login/login.component';
+import { TodosComponent } from './pages/todos/todos.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { SignupComponent } from './pages/signup/signup.component';
 
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "notes",
+    redirectTo: "todos",
     pathMatch: "full",
   },
   {
-    path: "notes",
-    component: NotesComponent,
+    path: "todos",
+    component: TodosComponent,
     canActivate: [AuthGuard],
   },
   {

@@ -1,4 +1,3 @@
-<!-- <router-outlet></router-outlet> -->
 <app-navbar></app-navbar>
 
 <div class="mt-5 p-5">
@@ -8,23 +7,3 @@
     </div>
   </div>
 </div>
-
-<form [formGroup]="todoForm" (ngSubmit)="addTodo()">
-  <p>
-    <label for="title">Title: </label>
-    <input type="text" id="title" formControlName="title" />
-  </p>
-  <p>
-    <label for="detail">Detail: </label>
-    <input type="text" id="detail" formControlName="detail" />
-  </p>
-  <p>
-    <button type="submit" [disabled]="!todoForm.valid">Add</button>
-  </p>
-</form>
-
-<ul *ngIf="todos.length > 0">
-  <li *ngFor="let todo of todos">
-    {{ todo | json }}
-  </li>
-</ul>

@@ -7,17 +7,16 @@ import { environment } from "src/environments/environment";
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
-  // baseURL = "http://localhost:8000/api/";
   baseURL = environment.apiUrl;
 
   // add new user
-  signupUser(user) {
-    return this.http.post(this.baseURL + "user/register", user);
+  signupUser(user:any) {
+    return this.http.post(this.baseURL + "auth/register/", user);
   }
 
   // login user
-  loginUser(user) {
-    return this.http.post(this.baseURL + "user/login", user);
+  loginUser(user:any) {
+    return this.http.post(this.baseURL + "auth/login/", user);
   }
 
   // get user detail

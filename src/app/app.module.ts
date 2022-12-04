@@ -5,24 +5,28 @@ import { ReactiveFormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { LoginComponent } from "./login/login.component";
-import { SignupComponent } from "./signup/signup.component";
-import { NotesComponent } from "./notes/notes.component";
-import { NavbarComponent } from "./navbar/navbar.component";
-import { ProfileComponent } from "./profile/profile.component";
-import { AuthService } from "./auth.service";
+
+import { LoginComponent } from "./pages/login/login.component";
+import { SignupComponent } from "./pages/signup/signup.component";
+import { TodosComponent } from "./pages/todos/todos.component";
+import { ProfileComponent } from "./pages/profile/profile.component";
+
+import { NavbarComponent } from "./components/navbar/navbar.component";
+
+import { AuthService } from "./services/auth.service";
+import { TodoService } from "./services/todo.service";
+
 import { AuthGuard } from "./auth.guard";
-import { NotesService } from "./notes.service";
 import { TokenInterceptorService } from "./token-interceptor.service";
 
 @NgModule({
   declarations: [
     AppComponent,
-    // LoginComponent,
-    // SignupComponent,
-    // NotesComponent,
+    LoginComponent,
+    SignupComponent,
+    TodosComponent,
     NavbarComponent,
-    // ProfileComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,7 @@ import { TokenInterceptorService } from "./token-interceptor.service";
   providers: [
     AuthService,
     AuthGuard,
-    NotesService,
+    TodoService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
