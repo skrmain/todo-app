@@ -1,29 +1,14 @@
 <h2 class="text-center p-3">Login, here</h2>
 <form [formGroup]="loginForm" (submit)="loginUser()">
-  <p class="form-group">
-    <label for="email">Email :</label>
-    <input
-      type="email"
-      id="email"
-      class="form-control"
-      formControlName="email"
-    />
-  </p>
-  <p>
-    <label for="password">Password :</label>
-    <input
-      type="password"
-      id="password"
-      class="form-control"
-      formControlName="password"
-    />
-  </p>
-  <p class="text-center mt-5">
-    <input
-      type="submit"
-      class="btn btn-primary"
-      [disabled]="loginForm.invalid"
-      value="Login"
-    />
-  </p>
+    <p class="form-group">
+        <label for="email">Email :</label>
+        <input type="email" id="email" class="form-control" formControlName="email" />
+    </p>
+    <p>
+        <label for="password">Password :</label>
+        <input type="password" id="password" class="form-control" formControlName="password" />
+    </p>
+    <p class="text-center mt-5">
+        <input type="submit" class="btn btn-primary" [disabled]="loginForm.invalid" value="Login" />
+    </p>
 </form>

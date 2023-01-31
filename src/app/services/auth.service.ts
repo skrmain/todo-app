@@ -1,42 +1,40 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { environment } from "src/environments/environment";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: "root",
+    providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
-  baseURL = environment.apiUrl;
+    constructor(private http: HttpClient) {}
+    baseURL = environment.apiUrl;
 
-  // add new user
-  signupUser(user:any) {
-    return this.http.post(this.baseURL + "auth/register/", user);
-  }
+    signupUser(user: any) {
+        return this.http.post(this.baseURL + 'auth/register/', user);
+    }
 
-  // login user
-  loginUser(user:any) {
-    return this.http.post(this.baseURL + "auth/login/", user);
-  }
+    loginUser(user: any) {
+        return this.http.post(this.baseURL + 'auth/login/', user);
+    }
 
-  // get user detail
-  getUserDetail() {
-    return this.http.get(this.baseURL + "user");
-  }
+    getUserDetail() {
+        return this.http.get(this.baseURL + 'user');
+    }
 
-  // logout user
-  logoutUser() {
-    localStorage.removeItem("auth_token");
-    return true;
-  }
+    logoutUser() {
+        localStorage.removeItem('auth_token');
+    }
 
-  // send the token
-  getToken() {
-    return localStorage.getItem("auth_token");
-  }
+    setToken(token: string) {
+        localStorage.setItem('auth_token', token);
+    }
 
-  // check token exists or Not
-  isLoggedIn() {
-    return !!localStorage.getItem("auth_token");
-  }
+    getToken() {
+        return localStorage.getItem('auth_token');
+    }
+
+    isAuthenticated() {
+        return !!this.getToken();
+    }
 }
