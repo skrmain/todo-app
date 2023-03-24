@@ -22,14 +22,20 @@ export class LoginComponent implements OnInit {
     }
 
     loginUser() {
-        this.authService.loginUser(this.loginForm.value).subscribe((result: any) => {
-            if (result.data.token) {
-                this.authService.setToken(result.data.token);
-                this.router.navigate(['/']);
-            } else {
-                alert('Error in Login');
-                this.loginForm.reset();
+        this.authService.loginUser(this.loginForm.value).subscribe(
+            (result: any) => {
+                if (result.data.token) {
+                    this.authService.setToken(result.data.token);
+                    this.router.navigate(['/']);
+                } else {
+                    alert('Error in Login');
+                    this.loginForm.reset();
+                }
+            },
+            (error) => {
+                // TODO: handle error
+                console.log('Error', error);
             }
-        });
+        );
     }
 }
