@@ -26,8 +26,6 @@ export class TodosComponent implements OnInit {
 
         if (title && detail && title.trim() && detail.trim()) {
             this.todoService.addTodo(this.todoForm.value).subscribe((result) => {
-                // title?.setValue('');
-                // detail?.setValue('');
                 this.todoForm.reset();
                 this.getTodos();
             });

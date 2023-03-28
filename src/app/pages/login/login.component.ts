@@ -10,9 +10,10 @@ import { AuthService } from '../../services/auth.service';
     templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
+    errors: string[] = [];
     protected loginForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required]],
+        password: ['', [Validators.required, Validators.maxLength(30)]],
     });
 
     constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private title: Title) {}
@@ -22,14 +23,29 @@ export class LoginComponent implements OnInit {
     }
 
     loginUser() {
-        this.authService.loginUser(this.loginForm.value).subscribe((result: any) => {
-            if (result.data.token) {
-                this.authService.setToken(result.data.token);
-                this.router.navigate(['/']);
-            } else {
-                alert('Error in Login');
-                this.loginForm.reset();
-            }
+        this.errors = [];
+        this.authService.loginUser(this.loginForm.value).subscribe({
+            next: (result: any) => {
+                if (result.data.token) {
+                    this.authService.setToken(result.data.token);
+                    this.router.navigate(['/']);
+                } else {
+                    this.errors.push('Something happen wrong try again.');
+                    this.loginForm.reset();
+                }
+            },
+            error: (error) => {
+                this.loginForm.get('password')?.reset();
+                this.errors.push(error.message);
+            },
         });
+    }
+
+    public get email() {
+        return this.loginForm.get('email');
+    }
+
+    public get password() {
+        return this.loginForm.get('password');
     }
 }

@@ -1,25 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
-import { environment } from 'src/environments/environment';
+import { HttpService } from './http.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    constructor(private http: HttpClient) {}
-    baseURL = environment.apiUrl;
+    constructor(private httpService: HttpService) {}
 
     signupUser(user: any) {
-        return this.http.post(this.baseURL + 'auth/register/', user);
+        return this.httpService.sendData('register', user);
     }
 
     loginUser(user: any) {
-        return this.http.post(this.baseURL + 'auth/login/', user);
+        return this.httpService.sendData('login', user);
     }
 
     getUserDetail() {
-        return this.http.get(this.baseURL + 'user');
+        return this.httpService.getData('users/me');
     }
 
     logoutUser() {

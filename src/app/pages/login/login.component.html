@@ -1,14 +1,42 @@
 <h2 class="text-center p-3">Login, here</h2>
+<!-- TODO: fix dismiss -->
+<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngFor="let error of errors">
+    {{ error }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 <form [formGroup]="loginForm" (submit)="loginUser()">
-    <p class="form-group">
-        <label for="email">Email :</label>
-        <input type="email" id="email" class="form-control" formControlName="email" />
-    </p>
-    <p>
-        <label for="password">Password :</label>
-        <input type="password" id="password" class="form-control" formControlName="password" />
-    </p>
+    <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input
+            type="email"
+            id="email"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': email?.touched && email?.errors, 'is-valid': email?.touched && !email?.errors }"
+            formControlName="email"
+        />
+        <div *ngIf="email?.touched">
+            <span class="invalid-feedback" *ngIf="email?.errors?.['required']">Required</span>
+            <span class="invalid-feedback" *ngIf="email?.errors?.['email']">Invalid Email</span>
+        </div>
+    </div>
+    <div class="form-group mt-2">
+        <label for="password" class="form-label">Password</label>
+        <input
+            type="password"
+            id="password"
+            class="form-control"
+            formControlName="password"
+            [ngClass]="{ 'is-invalid': password?.touched && password?.errors, 'is-valid': password?.touched && !password?.errors }"
+        />
+        <div *ngIf="password?.touched">
+            <span class="invalid-feedback" *ngIf="password?.errors?.['required']">Required</span>
+        </div>
+    </div>
     <p class="text-center mt-5">
-        <input type="submit" class="btn btn-primary" [disabled]="loginForm.invalid" value="Login" />
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">
+            Login
+            <!-- TODO: -->
+            <!-- <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> -->
+        </button>
     </p>
 </form>
