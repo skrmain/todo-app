@@ -1,4 +1,9 @@
 <h2 class="text-center p-3">Signup, here</h2>
+<!-- TODO: fix dismiss -->
+<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngFor="let error of errors">
+    {{ error }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 <form [formGroup]="signupForm" (submit)="signupUser()">
     <div class="form-group">
         <label for="username" class="form-label">Username</label>
@@ -11,7 +16,7 @@
         <div *ngIf="username?.touched">
             <span class="invalid-feedback" *ngIf="username?.errors?.['required']">Required</span>
             <span class="invalid-feedback" *ngIf="username?.errors?.['minlength'] || username?.errors?.['maxlength']">
-                Length must be between 3 and 20.
+                Length must be between 5 and 20.
             </span>
         </div>
     </div>

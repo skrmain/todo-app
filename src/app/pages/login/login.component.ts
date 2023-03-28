@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
 
     loginUser() {
         this.errors = [];
-        this.authService.loginUser(this.loginForm.value).subscribe(
-            (result: any) => {
+        this.authService.loginUser(this.loginForm.value).subscribe({
+            next: (result: any) => {
                 if (result.data.token) {
                     this.authService.setToken(result.data.token);
                     this.router.navigate(['/']);
@@ -34,11 +34,11 @@ export class LoginComponent implements OnInit {
                     this.loginForm.reset();
                 }
             },
-            (error) => {
+            error: (error) => {
                 this.loginForm.get('password')?.reset();
                 this.errors.push(error.message);
-            }
-        );
+            },
+        });
     }
 
     public get email() {
