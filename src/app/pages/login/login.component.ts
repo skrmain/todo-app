@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent implements OnInit {
     protected loginForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required]],
+        password: ['', [Validators.required, Validators.maxLength(30)]],
     });
 
     constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private title: Title) {}
@@ -37,5 +37,13 @@ export class LoginComponent implements OnInit {
                 console.log('Error', error);
             }
         );
+    }
+
+    public get email() {
+        return this.loginForm.get('email');
+    }
+
+    public get password() {
+        return this.loginForm.get('password');
     }
 }
