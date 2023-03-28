@@ -1,4 +1,9 @@
 <h2 class="text-center p-3">Login, here</h2>
+<!-- TODO: fix dismiss -->
+<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngFor="let error of errors">
+    {{ error }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 <form [formGroup]="loginForm" (submit)="loginUser()">
     <div class="form-group">
         <label for="email" class="form-label">Email</label>
@@ -28,6 +33,10 @@
         </div>
     </div>
     <p class="text-center mt-5">
-        <input type="submit" class="btn btn-primary" [disabled]="loginForm.invalid" value="Login" />
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">
+            Login
+            <!-- TODO: -->
+            <!-- <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> -->
+        </button>
     </p>
 </form>
