@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
-import { catchError, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -15,7 +15,7 @@ export class HttpService {
         return this.http.post(this.baseURL + path, data).pipe(catchError(this.handleError));
     }
 
-    getData(path: string) {
+    getData(path: string): Observable<any> {
         return this.http.get(this.baseURL + path).pipe(catchError(this.handleError));
     }
 
