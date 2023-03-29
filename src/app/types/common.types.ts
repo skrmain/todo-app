@@ -6,9 +6,9 @@ export enum TodoPermissions {
 }
 
 export enum TodoStatus {
-    'created' = 'created',
-    'done' = 'done',
-    'archive' = 'archive',
+    created = 'created',
+    done = 'done',
+    archive = 'archive',
 }
 
 export interface Todo {

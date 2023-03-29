@@ -11,7 +11,7 @@ export class HttpService {
     constructor(private http: HttpClient) {}
     baseURL = environment.apiUrl;
 
-    sendData(path: string, data: any) {
+    sendData(path: string, data: any): Observable<any> {
         return this.http.post(this.baseURL + path, data).pipe(catchError(this.handleError));
     }
 
@@ -19,11 +19,11 @@ export class HttpService {
         return this.http.get(this.baseURL + path).pipe(catchError(this.handleError));
     }
 
-    updateOne(path: string, data: any) {
+    updateOne(path: string, data: any): Observable<any> {
         return this.http.patch(this.baseURL + path, data).pipe(catchError(this.handleError));
     }
 
-    deleteOne(path: string) {
+    deleteOne(path: string): Observable<any> {
         return this.http.delete(this.baseURL + path).pipe(catchError(this.handleError));
     }
 
