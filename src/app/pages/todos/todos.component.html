@@ -13,25 +13,74 @@
             ></textarea>
         </div>
         <div class="col-2">
-            <button type="submit" class="btn btn-outline-success rounded-circle d-block p-2">
-                <span class="material-icons" style="vertical-align: middle; font-size: 2.5em; font-weight: bold">add</span>
-            </button>
+            <button type="submit" class="btn btn-outline-success">Add</button>
         </div>
     </div>
 </form>
 <div class="mt-5">
     <ul class="p-3" *ngIf="todos.length">
         <li *ngFor="let todo of todos" class="row m-2 p-2 bg-white border align-items-center">
-            <span class="col-12">{{ todo.title }}</span>
+            <!-- {{ todo | json }} -->
+            <span class="col-12">{{ todo.title }} | {{ todo.status }}</span>
             <div class="col-8">
                 <pre>{{ todo.detail }}</pre>
             </div>
             <span class="col-3">
-                <button class="btn btn-outline-danger" (click)="deleteTodo(todo._id)">
-                    <span class="material-icons">delete</span>
+                <button
+                    *ngIf="todo.status === 'created'"
+                    [disabled]="!canUpdate(todo.permissions)"
+                    class="btn btn-outline-success"
+                    (click)="markDone(todo._id, todo.title)"
+                >
+                    <span class="material-icons">Done</span>
+                </button>
+                <button
+                    *ngIf="todo.status === 'done'"
+                    [disabled]="!canUpdate(todo.permissions)"
+                    class="btn btn-outline-secondary"
+                    (click)="markArchive(todo._id, todo.title)"
+                >
+                    <span class="material-icons">Archive</span>
+                </button>
+                <button [disabled]="!canShare(todo.permissions)" class="btn btn-outline-primary" (click)="openShareModal(todo._id)">
+                    <span class="material-icons">Share</span>
+                </button>
+                <button [disabled]="!canDelete(todo.permissions)" class="btn btn-outline-danger" (click)="deleteTodo(todo._id)">
+                    <span class="material-icons">Delete</span>
                 </button>
             </span>
         </li>
     </ul>
+    <div class="modal" tabindex="-1" aria-hidden="true" *ngIf="shareModalVisible">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Share Todo</h5>
+                    <button type="button" (click)="closeShareModal()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="searchForm" (submit)="searchUser()">
+                        <div>
+                            <input type="text" formControlName="username" (input)="searchUser()" />
+                        </div>
+                    </form>
+                    <div>
+                        <p
+                            *ngFor="let user of searchedUsers"
+                            class="btn d-block"
+                            [ngClass]="{ 'btn-outline-primary': user._id !== selectedUserId, 'btn-primary': user._id === selectedUserId }"
+                            (click)="selectUser(user._id)"
+                        >
+                            {{ user.username }}
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="closeShareModal()">Cancel</button>
+                    <button type="button" class="btn btn-primary" (click)="shareTodo()">Share</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <p *ngIf="!todos.length" class="text-center mt-5">No Todo</p>
 </div>
