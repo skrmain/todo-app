@@ -16,6 +16,10 @@ export class AuthService {
         return this.httpService.sendData('login', user);
     }
 
+    getUserDetail() {
+        return this.httpService.getData('users/me');
+    }
+
     logoutUser() {
         localStorage.removeItem('auth_token');
     }

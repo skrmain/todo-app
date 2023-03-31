@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-userdetail',
@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ProfileComponent implements OnInit {
     user: any;
-    constructor(private userService: UserService, private title: Title) {}
+    constructor(private authService: AuthService, private title: Title) {}
 
     ngOnInit() {
         this.title.setTitle('Profile | Angular-TodoApp');
@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
     }
 
     getUserDetail() {
-        this.userService.getUserDetail().subscribe((result: any) => {
+        this.authService.getUserDetail().subscribe((result: any) => {
             this.user = result.data;
         });
     }
