@@ -1,9 +1,9 @@
 <form [formGroup]="todoForm" (submit)="addTodo()" class="mt-4">
     <div class="form-group row">
-        <div class="col-10 input-group-lg">
-            <input type="text" class="form-control" placeholder="Title" formControlName="title" aria-describedby="inputGroup-sizing-lg" />
+        <div class="col-12 input-group-lg">
+            <input type="text" class="form-control" placeholder="Title" formControlName="title" />
         </div>
-        <div class="col-10 input-group-lg">
+        <div class="col-12 input-group-lg">
             <textarea
                 type="text"
                 class="form-control"
@@ -19,35 +19,47 @@
 </form>
 <div class="mt-5">
     <ul class="p-3" *ngIf="todos.length">
-        <li *ngFor="let todo of todos" class="row m-2 p-2 bg-white border align-items-center">
-            <!-- {{ todo | json }} -->
-            <span class="col-12">{{ todo.title }} | {{ todo.status }}</span>
-            <div class="col-8">
-                <pre>{{ todo.detail }}</pre>
-            </div>
-            <span class="col-3">
+        <li *ngFor="let todo of todos" class="row bg-white border align-items-center">
+            <span class="col-2 text-center">
                 <button
                     *ngIf="todo.status === 'created'"
                     [disabled]="!canUpdate(todo.permissions)"
-                    class="btn btn-outline-success"
+                    class="btn"
                     (click)="markDone(todo._id, todo.title)"
                 >
-                    <span class="material-icons">Done</span>
+                    <i class="bi bi-square text-success" style="font-size: 1.3rem"></i>
                 </button>
                 <button
                     *ngIf="todo.status === 'done'"
                     [disabled]="!canUpdate(todo.permissions)"
-                    class="btn btn-outline-secondary"
+                    class="btn"
+                    (click)="markUnDone(todo._id, todo.title)"
+                >
+                    <i class="bi bi-check-square-fill text-success" style="font-size: 1.3rem"></i>
+                </button>
+            </span>
+            <div class="col-8 my-2" [style]="{ 'text-decoration': todo.status === 'done' ? 'line-through' : 'initial' }">
+                <h3 class="h5" [style]="{ 'text-decoration': todo.status === 'done' ? 'line-through' : 'initial' }">
+                    {{ todo.title }}
+                </h3>
+
+                <span class="text-muted">{{ todo.detail }}</span>
+            </div>
+            <span class="col-2 text-center">
+                <!-- <button
+                    *ngIf="todo.status === 'done'"
+                    [disabled]="!canUpdate(todo.permissions)"
+                    class="btn"
                     (click)="markArchive(todo._id, todo.title)"
                 >
-                    <span class="material-icons">Archive</span>
+                    <i class="bi bi-archive text-secondary"></i>
+                </button> -->
+                <button [disabled]="!canShare(todo.permissions)" class="btn" (click)="openShareModal(todo._id)">
+                    <i class="bi bi-share-fill text-primary" style="font-size: 1.3rem"></i>
                 </button>
-                <button [disabled]="!canShare(todo.permissions)" class="btn btn-outline-primary" (click)="openShareModal(todo._id)">
-                    <span class="material-icons">Share</span>
-                </button>
-                <button [disabled]="!canDelete(todo.permissions)" class="btn btn-outline-danger" (click)="deleteTodo(todo._id)">
-                    <span class="material-icons">Delete</span>
-                </button>
+                <!-- <button [disabled]="!canDelete(todo.permissions)" class="btn" (click)="deleteTodo(todo._id)">
+                    <i class="bi bi-trash text-danger"></i>
+                </button> -->
             </span>
         </li>
     </ul>

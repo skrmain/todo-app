@@ -45,7 +45,11 @@ export class TodosComponent implements OnInit {
 
     getTodos() {
         this.todoService.getTodos().subscribe((result: any) => {
-            this.todos = result.data;
+            this.todos = result.data.sort((a: Todo, b: Todo) => {
+                const x = a.status;
+                const y = b.status;
+                return x < y ? -1 : x > y ? 1 : 0;
+            });
         });
     }
 
@@ -58,6 +62,11 @@ export class TodosComponent implements OnInit {
     // TODO: remove title
     markDone(todoId: string, title: string) {
         this.updateTodo(todoId, { title, status: TodoStatus.done });
+    }
+
+    // TODO: remove title
+    markUnDone(todoId: string, title: string) {
+        this.updateTodo(todoId, { title, status: TodoStatus.created });
     }
 
     // TODO: remove title
