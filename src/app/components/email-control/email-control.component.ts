@@ -41,6 +41,6 @@ export class EmailControlComponent implements ControlValueAccessor {
     }
 
     valueChanged() {
-        this.onChange(this.form.get('email')?.value);
+        this.onChange(this.email?.value);
     }
 }
