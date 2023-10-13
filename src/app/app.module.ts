@@ -18,9 +18,10 @@ import { TodoService } from './services/todo.service';
 
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { EmailControlComponent } from './components/email-control/email-control.component';
 
 @NgModule({
-    declarations: [AppComponent, LoginComponent, SignupComponent, TodosComponent, NavbarComponent, ProfileComponent],
+    declarations: [AppComponent, LoginComponent, SignupComponent, TodosComponent, NavbarComponent, ProfileComponent, EmailControlComponent],
     imports: [BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule],
     providers: [
         AuthService,
