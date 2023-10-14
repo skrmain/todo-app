@@ -32,3 +32,11 @@ export interface SearchUser {
     _id: string;
     username: string;
 }
+
+export interface UserProfile {
+    _id: string;
+    username: string;
+    email: string;
+    createdAt: string;
+    updatedAt: string;
+}

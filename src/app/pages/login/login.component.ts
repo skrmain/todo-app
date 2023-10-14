@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
@@ -36,13 +36,5 @@ export class LoginComponent implements OnInit {
                 this.errors.push(error.message);
             },
         });
-    }
-
-    public get email() {
-        return this.loginForm.get('email');
-    }
-
-    public get password() {
-        return this.loginForm.get('password');
     }
 }

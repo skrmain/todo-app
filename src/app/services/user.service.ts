@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiResponse, SearchUser } from '../types/common.types';
+
+import { ApiResponse, SearchUser, UserProfile } from '../types/common.types';
 
 import { HttpService } from './http.service';
 
@@ -10,7 +11,7 @@ import { HttpService } from './http.service';
 export class UserService {
     constructor(private httpService: HttpService) {}
 
-    getUserDetail() {
+    getUserDetail(): Observable<ApiResponse<UserProfile>> {
         return this.httpService.getData('users/me');
     }
 
