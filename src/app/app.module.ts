@@ -21,6 +21,8 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { EmailControlComponent } from './components/email-control/email-control.component';
 import { PasswordControlComponent } from './components/password-control/password-control.component';
 import { UsernameControlComponent } from './components/username-control/username-control.component';
+import { SubmitButtonComponent } from './components/submit-button/submit-button.component';
+import { AlertsComponent } from './components/alerts/alerts.component';
 
 @NgModule({
     declarations: [
@@ -33,6 +35,8 @@ import { UsernameControlComponent } from './components/username-control/username
         EmailControlComponent,
         PasswordControlComponent,
         UsernameControlComponent,
+        SubmitButtonComponent,
+        AlertsComponent,
     ],
     imports: [BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule],
     providers: [
