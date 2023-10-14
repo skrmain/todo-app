@@ -9,11 +9,11 @@ export class AuthService {
     constructor(private httpService: HttpService) {}
 
     signupUser(user: any) {
-        return this.httpService.sendData('register', user);
+        return this.httpService.sendData('/register', user);
     }
 
     loginUser(user: any) {
-        return this.httpService.sendData('login', user);
+        return this.httpService.sendData('/login', user);
     }
 
     logoutUser() {

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { catchError, Observable, throwError } from 'rxjs';
+import { ApiResponse } from '../types/common.types';
 
 @Injectable({
     providedIn: 'root',
@@ -15,8 +16,8 @@ export class HttpService {
         return this.http.post(this.baseURL + path, data).pipe(catchError(this.handleError));
     }
 
-    getData(path: string): Observable<any> {
-        return this.http.get(this.baseURL + path).pipe(catchError(this.handleError));
+    getData<T = any>(path: string) {
+        return this.http.get<ApiResponse<T>>(this.baseURL + path).pipe(catchError(this.handleError));
     }
 
     updateOne(path: string, data: any): Observable<any> {

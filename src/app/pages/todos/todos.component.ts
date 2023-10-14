@@ -44,12 +44,14 @@ export class TodosComponent implements OnInit {
     }
 
     getTodos() {
-        this.todoService.getTodos().subscribe((result: any) => {
-            this.todos = result.data.sort((a: Todo, b: Todo) => {
-                const x = a.status;
-                const y = b.status;
-                return x < y ? -1 : x > y ? 1 : 0;
-            });
+        this.todoService.getTodos().subscribe((result) => {
+            if (result.data) {
+                this.todos = result.data.sort((a: Todo, b: Todo) => {
+                    const x = a.status;
+                    const y = b.status;
+                    return x < y ? -1 : x > y ? 1 : 0;
+                });
+            }
         });
     }
 

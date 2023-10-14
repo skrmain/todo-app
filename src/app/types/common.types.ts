@@ -21,11 +21,19 @@ export interface Todo {
     permissions: TodoPermissions[];
 }
 
+interface Metadata {
+    pageNumber: 1;
+    pageSize: 10;
+    sortOrder: 'desc';
+    sortBy: 'updatedAt';
+    total: 1;
+}
+
 export interface ApiResponse<T> {
     data?: T;
     message: string;
     status: boolean;
-    metadata: object;
+    metadata: Metadata;
 }
 
 export interface SearchUser {
