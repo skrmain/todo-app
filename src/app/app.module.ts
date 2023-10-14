@@ -23,6 +23,8 @@ import { PasswordControlComponent } from './components/password-control/password
 import { UsernameControlComponent } from './components/username-control/username-control.component';
 import { SubmitButtonComponent } from './components/submit-button/submit-button.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
+import { NewTodoComponent } from './components/new-todo/new-todo.component';
+import { TodoComponent } from './components/todo/todo.component';
 
 @NgModule({
     declarations: [
@@ -37,6 +39,8 @@ import { AlertsComponent } from './components/alerts/alerts.component';
         UsernameControlComponent,
         SubmitButtonComponent,
         AlertsComponent,
+        NewTodoComponent,
+        TodoComponent,
     ],
     imports: [BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule],
     providers: [

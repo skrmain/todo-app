@@ -6,7 +6,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
     selector: 'app-navbar',
     template: `
-        <nav class="navbar fixed-top navbar-expand navbar-dark shadow" style="background-color: rgb(35, 104, 255)">
+        <nav class="navbar fixed-top navbar-expand navbar-dark bg-primary">
             <a class="navbar-brand">{{ title }}</a>
             <ul class="navbar-nav ml-auto w-100 pe-3">
                 <li class="nav-item ml-2" *ngIf="!isAuthenticated()">

@@ -14,10 +14,6 @@ export class TodosComponent implements OnInit {
     todos: Todo[] = [];
     shareModalVisible = false;
     activeTodoId: string | undefined;
-    todoForm = this.fb.group({
-        title: ['', [Validators.required, Validators.minLength(5)]],
-        detail: [''],
-    });
     searchForm = this.fb.group({
         username: ['', [Validators.required]],
     });
@@ -30,20 +26,9 @@ export class TodosComponent implements OnInit {
         this.getTodos();
     }
 
-    addTodo() {
-        const { title, detail } = this.todoForm.value;
+    getTodos(type = '') {
+        console.log({ type });
 
-        if (title && detail && title.trim() && detail.trim()) {
-            this.todoService.addTodo(this.todoForm.value).subscribe((result) => {
-                this.todoForm.reset();
-                this.getTodos();
-            });
-        } else {
-            alert('Could not Add Empty Message');
-        }
-    }
-
-    getTodos() {
         this.todoService.getTodos().subscribe((result) => {
             if (result.data) {
                 this.todos = result.data.sort((a: Todo, b: Todo) => {
