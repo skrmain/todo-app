@@ -23,7 +23,17 @@ import { PasswordControlComponent } from './components/password-control/password
 import { UsernameControlComponent } from './components/username-control/username-control.component';
 
 @NgModule({
-    declarations: [AppComponent, LoginComponent, SignupComponent, TodosComponent, NavbarComponent, ProfileComponent, EmailControlComponent, PasswordControlComponent, UsernameControlComponent],
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        SignupComponent,
+        TodosComponent,
+        NavbarComponent,
+        ProfileComponent,
+        EmailControlComponent,
+        PasswordControlComponent,
+        UsernameControlComponent,
+    ],
     imports: [BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule],
     providers: [
         AuthService,

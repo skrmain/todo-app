@@ -1,46 +1,43 @@
-import { Component, forwardRef } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { ControlContainer, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-email-control',
-    templateUrl: './email-control.component.html',
+    template: `
+        <div class="form-group mt-2">
+            <label for="email" class="form-label">Email</label>
+            <input
+                type="email"
+                id="email"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': email?.touched && email?.errors, 'is-valid': email?.touched && !email?.errors }"
+                formControlName="email"
+            />
+            <div *ngIf="email?.touched">
+                <span class="invalid-feedback" *ngIf="email?.errors?.['required']">Required</span>
+                <span class="invalid-feedback" *ngIf="email?.errors?.['email']">Invalid Email</span>
+            </div>
+        </div>
+    `,
     styles: [],
-    providers: [
+    viewProviders: [
         {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => EmailControlComponent),
-            multi: true,
+            provide: ControlContainer,
+            useFactory: () => inject(ControlContainer, { skipSelf: true }),
         },
     ],
 })
-export class EmailControlComponent implements ControlValueAccessor {
-    form: FormGroup<{ email: FormControl<string | null> }>;
-    constructor(formBuilder: FormBuilder) {
-        this.form = formBuilder.group({
-            email: [''],
-        });
-    }
-    value = '';
-    onChange = (_: any) => {};
-    onTouched = () => {};
-
-    public get email() {
-        return this.form.get('email');
+export class EmailControlComponent {
+    parentContainer = inject(ControlContainer);
+    get parentFormGroup() {
+        return this.parentContainer.control as FormGroup;
     }
 
-    registerOnChange(fn: any): void {
-        this.onChange = fn;
+    ngOnInit() {
+        this.parentFormGroup.addControl('email', new FormControl('', [Validators.required, Validators.email]));
     }
 
-    registerOnTouched(fn: any): void {
-        this.onTouched = fn;
-    }
-
-    writeValue(obj: any): void {
-        this.value = obj;
-    }
-
-    valueChanged() {
-        this.onChange(this.email?.value);
+    get email() {
+        return this.parentFormGroup.get('email');
     }
 }

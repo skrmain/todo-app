@@ -5,11 +5,9 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 <form [formGroup]="signupForm" (submit)="signupUser()">
-    <app-username-control formControlName="username"></app-username-control>
-    <app-email-control formControlName="email"></app-email-control>
-    <app-password-control formControlName="password"></app-password-control>
-    {{ signupForm.errors | json }}
-    {{ signupForm.value | json }}
+    <app-username-control></app-username-control>
+    <app-email-control></app-email-control>
+    <app-password-control></app-password-control>
     <p class="text-center mt-5">
         <input type="submit" class="btn btn-primary" [disabled]="signupForm.invalid" value="Signup" />
     </p>

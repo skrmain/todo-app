@@ -11,10 +11,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
     errors: string[] = [];
-    protected loginForm = this.fb.group({
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.maxLength(30)]],
-    });
+    protected loginForm = this.fb.group({});
 
     constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private title: Title) {}
 

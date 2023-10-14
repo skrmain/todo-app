@@ -1,10 +1,10 @@
-import { Component, forwardRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { ControlContainer, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-password-control',
     template: `
-        <div class="form-group mt-2" [formGroup]="form">
+        <div class="form-group mt-2">
             <label for="password" class="form-label">Password</label>
             <input
                 type="password"
@@ -12,7 +12,6 @@ import { FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular
                 class="form-control"
                 formControlName="password"
                 [ngClass]="{ 'is-invalid': password?.touched && password?.errors, 'is-valid': password?.touched && !password?.errors }"
-                (input)="valueChanged()"
             />
             <div *ngIf="password?.touched">
                 <span class="invalid-feedback" *ngIf="password?.errors?.['required']">Required</span>
@@ -23,42 +22,24 @@ import { FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular
         </div>
     `,
     styles: [],
-    providers: [
+    viewProviders: [
         {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => PasswordControlComponent),
-            multi: true,
+            provide: ControlContainer,
+            useFactory: () => inject(ControlContainer, { skipSelf: true }),
         },
     ],
 })
 export class PasswordControlComponent {
-    form: FormGroup<{ password: FormControl<string | null> }>;
-    constructor(formBuilder: FormBuilder) {
-        this.form = formBuilder.group({
-            password: [''],
-        });
-    }
-    value = '';
-    onChange = (_: any) => {};
-    onTouched = () => {};
-
-    public get password() {
-        return this.form.get('password');
+    parentContainer = inject(ControlContainer);
+    get parentFormGroup() {
+        return this.parentContainer.control as FormGroup;
     }
 
-    registerOnChange(fn: any): void {
-        this.onChange = fn;
+    ngOnInit() {
+        this.parentFormGroup.addControl('password', new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]));
     }
 
-    registerOnTouched(fn: any): void {
-        this.onTouched = fn;
-    }
-
-    writeValue(obj: any): void {
-        this.value = obj;
-    }
-
-    valueChanged() {
-        this.onChange(this.password?.value);
+    get password() {
+        return this.parentFormGroup.get('password');
     }
 }
