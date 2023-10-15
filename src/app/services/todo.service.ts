@@ -1,30 +1,31 @@
 import { Injectable } from '@angular/core';
 
 import { HttpService } from './http.service';
+import { Todo } from '../types/common.types';
 
 @Injectable({
     providedIn: 'root',
 })
 export class TodoService {
-    constructor(private httpService: HttpService) {}
+    constructor(private _httpService: HttpService) {}
 
     getTodos() {
-        return this.httpService.getData('todos');
+        return this._httpService.getData<Todo[]>('/todos');
     }
 
     addTodo(data: any) {
-        return this.httpService.sendData('todos', data);
+        return this._httpService.sendData('/todos', data);
     }
 
     deleteTodo(todoId: string) {
-        return this.httpService.deleteOne('todos/' + todoId);
+        return this._httpService.deleteOne('/todos/' + todoId);
     }
 
     updateTodo(todoId: string, data: any) {
-        return this.httpService.updateOne('todos/' + todoId, data);
+        return this._httpService.updateOne('/todos/' + todoId, data);
     }
 
     shareTodo(todoId: string, userId: string) {
-        return this.httpService.updateOne(`todos/${todoId}/users/${userId}/permissions`, { permissions: ['read'] });
+        return this._httpService.updateOne(`/todos/${todoId}/users/${userId}/permissions`, { permissions: ['read'] });
     }
 }
