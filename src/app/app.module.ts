@@ -25,6 +25,11 @@ import { SubmitButtonComponent } from './components/submit-button/submit-button.
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { NewTodoComponent } from './components/new-todo/new-todo.component';
 import { TodoComponent } from './components/todo/todo.component';
+import { CanUpdatePipe } from './pipes/can-update.pipe';
+import { CanSharePipe } from './pipes/can-share.pipe';
+import { CanDeletePipe } from './pipes/can-delete.pipe';
+import { ShareModalComponent } from './components/share-modal/share-modal.component';
+import { TodoDetailModalComponent } from './components/todo-detail-modal/todo-detail-modal.component';
 
 @NgModule({
     declarations: [
@@ -41,6 +46,11 @@ import { TodoComponent } from './components/todo/todo.component';
         AlertsComponent,
         NewTodoComponent,
         TodoComponent,
+        CanUpdatePipe,
+        CanSharePipe,
+        CanDeletePipe,
+        ShareModalComponent,
+        TodoDetailModalComponent,
     ],
     imports: [BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule],
     providers: [
