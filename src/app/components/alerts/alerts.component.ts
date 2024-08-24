@@ -1,15 +1,38 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { AlertService } from 'src/app/services/alerts.service';
 
 @Component({
     selector: 'app-alerts',
     template: `
-        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngFor="let error of errors">
-            {{ error }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="alert-container position-absolute">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngFor="let error of errors">
+                {{ error }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         </div>
     `,
-    styles: [],
+    styles: [
+        `
+            .alert-container {
+                z-index: 1030;
+                left: 50%;
+                transform: translate(-50%, 0);
+                top: 2rem;
+            }
+        `,
+    ],
 })
 export class AlertsComponent {
-    @Input() errors?: string[];
+    errors?: string[] = [];
+    constructor(readonly alertService: AlertService) {
+        alertService.alerts$.subscribe({
+            next: (value) => {
+                this.errors?.push(value);
+            },
+            error: (error) => {
+                console.log('Alert Error', error);
+            },
+        });
+    }
 }

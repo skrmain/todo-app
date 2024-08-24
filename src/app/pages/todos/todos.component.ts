@@ -17,7 +17,7 @@ export class TodosComponent implements OnInit {
 
     constructor(private todoService: TodoService, private title: Title) {}
     ngOnInit() {
-        this.title.setTitle('Todos | Angular-TodoApp');
+        this.title.setTitle('Todos | TodoApp');
         this.getTodos();
     }
 

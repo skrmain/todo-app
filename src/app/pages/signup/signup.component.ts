@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '../../services/auth.service';
+import { AlertService } from 'src/app/services/alerts.service';
 
 @Component({
     selector: 'app-signup',
     template: `
         <h2 class="text-center p-3">Signup, here</h2>
-        <app-alerts [errors]="errors"></app-alerts>
         <form [formGroup]="signupForm" (submit)="signupUser()">
             <app-username-control></app-username-control>
             <app-email-control></app-email-control>
@@ -19,18 +19,22 @@ import { AuthService } from '../../services/auth.service';
     `,
 })
 export class SignupComponent implements OnInit {
-    errors: string[] = [];
     loader = false;
     protected signupForm = this.fb.group({});
-    constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private title: Title) {}
+    constructor(
+        private fb: FormBuilder,
+        private authService: AuthService,
+        private router: Router,
+        private title: Title,
+        private readonly alertService: AlertService
+    ) {}
 
     ngOnInit() {
-        this.title.setTitle('SignUp | Angular-TodoApp');
+        this.title.setTitle('SignUp | TodoApp');
     }
 
     signupUser() {
         this.loader = true;
-        this.errors = [];
         this.authService.signupUser(this.signupForm.value).subscribe({
             next: (result) => {
                 this.loader = false;
@@ -39,7 +43,7 @@ export class SignupComponent implements OnInit {
             error: (error) => {
                 this.loader = false;
                 this.signupForm.get('password')?.reset();
-                this.errors.push(error.message);
+                this.alertService.alert(error.message);
             },
         });
     }

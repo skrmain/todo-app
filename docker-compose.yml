@@ -1,8 +1,0 @@
-services:
-    server:
-        image: skrmain/expressjs-todo-api:0.5.2
-        network_mode: host
-        # ports:
-        #     - 8000:8000
-        # environment:
-        #     - MONGODB_URI=mongodb://admin:admin@localhost:27017/

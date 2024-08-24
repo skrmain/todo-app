@@ -11,7 +11,7 @@ export class UserService {
     constructor(private httpService: HttpService) {}
 
     getUserDetail() {
-        return this.httpService.getData<UserProfile>('/users/me');
+        return this.httpService.getData<UserProfile>('/user');
     }
 
     searchUser(username: string) {
