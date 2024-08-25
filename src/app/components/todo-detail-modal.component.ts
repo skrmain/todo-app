@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { TodoService } from '../../services/todo.service';
-import { UserService } from '../../services/user.service';
-import { Todo, TodoStatus } from '../../types/common.types';
-import { CanUpdatePipe } from '../../pipes/can-update.pipe';
+import { TodoService } from '../services/todo.service';
+import { UserService } from '../services/user.service';
+import { Todo, TodoStatus } from '../types/common.types';
+import { CanUpdatePipe } from '../pipes/can-update.pipe';
 import { CommonModule } from '@angular/common';
-import { CanDeletePipe } from '../../pipes/can-delete.pipe';
-import { CanSharePipe } from '../../pipes/can-share.pipe';
-import { ShareModalComponent } from '../share-modal/share-modal.component';
+import { CanDeletePipe } from '../pipes/can-delete.pipe';
+import { CanSharePipe } from '../pipes/can-share.pipe';
+import { ShareModalComponent } from './share-modal.component';
 
 @Component({
     selector: 'app-todo-detail-modal',

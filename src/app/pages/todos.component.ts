@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 
-import { Todo, TodoStatus } from '../../types/common.types';
-import { TodoService } from '../../services/todo.service';
-import { CanUpdatePipe } from '../../pipes/can-update.pipe';
-import { NewTodoComponent } from '../../components/new-todo/new-todo.component';
-import { CommonModule } from '@angular/common';
-import { ShareModalComponent } from '../../components/share-modal/share-modal.component';
-import { TodoDetailModalComponent } from '../../components/todo-detail-modal/todo-detail-modal.component';
+import { Todo, TodoStatus } from '../types/common.types';
+import { TodoService } from '../services/todo.service';
+import { CanUpdatePipe } from '../pipes/can-update.pipe';
+import { NewTodoComponent } from '../components/new-todo.component';
+import { ShareModalComponent } from '../components/share-modal.component';
+import { TodoDetailModalComponent } from '../components/todo-detail-modal.component';
 
 @Component({
     selector: 'app-todos',

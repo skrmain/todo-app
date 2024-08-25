@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-
-import { UserService } from '../../services/user.service';
-import { UserProfile } from '../../types/common.types';
 import { CommonModule } from '@angular/common';
+
+import { UserService } from '../services/user.service';
+import { UserProfile } from '../types/common.types';
 
 @Component({
     selector: 'app-profile',

@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TodoService } from '../../services/todo.service';
-import { UserService } from '../../services/user.service';
-import { SearchUser } from '../../types/common.types';
 import { CommonModule } from '@angular/common';
+
+import { TodoService } from '../services/todo.service';
+import { UserService } from '../services/user.service';
+import { SearchUser } from '../types/common.types';
 
 @Component({
     selector: 'app-share-modal',

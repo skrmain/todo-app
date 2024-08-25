@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { AlertsComponent } from './components/alerts/alerts.component';
+import { NavbarComponent } from './components/navbar.component';
+import { AlertsComponent } from './components/alerts.component';
 
 @Component({
     selector: 'app-root',

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { TodoService } from '../../services/todo.service';
+import { TodoService } from '../services/todo.service';
 
 @Component({
     selector: 'app-new-todo',

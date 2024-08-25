@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-
-import { AuthService } from '../../services/auth.service';
-import { AlertService } from '../../services/alerts.service';
-import { EmailControlComponent } from '../../components/email-control/email-control.component';
-import { PasswordControlComponent } from '../../components/password-control/password-control.component';
-import { SubmitButtonComponent } from '../../components/submit-button/submit-button.component';
 import { CommonModule } from '@angular/common';
+
+import { AuthService } from '../services/auth.service';
+import { AlertService } from '../services/alerts.service';
+import { EmailControlComponent } from '../components/email-control.component';
+import { PasswordControlComponent } from '../components/password-control.component';
+import { SubmitButtonComponent } from '../components/submit-button.component';
 
 @Component({
     selector: 'app-login',
