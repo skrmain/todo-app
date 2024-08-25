@@ -1,8 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ControlContainer, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ControlContainer, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-password-control',
+    standalone: true,
+    imports: [CommonModule, ReactiveFormsModule],
     template: `
         <div class="form-group mt-2">
             <label for="password" class="form-label">Password</label>
@@ -12,7 +15,10 @@ import { ControlContainer, FormControl, FormGroup, Validators } from '@angular/f
                     [type]="isPassword ? 'password' : 'text'"
                     class="form-control"
                     formControlName="password"
-                    [ngClass]="{ 'is-invalid': password?.touched && password?.errors, 'is-valid': password?.touched && !password?.errors }"
+                    [ngClass]="{
+                        'is-invalid': password?.touched && password?.errors,
+                        'is-valid': password?.touched && !password?.errors
+                    }"
                 />
                 <button class="input-group-text btn btn-primary" type="button" (click)="togglePassword()">
                     <i *ngIf="!isPassword" class="bi bi-eye-fill"></i>
@@ -21,7 +27,10 @@ import { ControlContainer, FormControl, FormGroup, Validators } from '@angular/f
             </div>
             <div *ngIf="password?.touched">
                 <span class="invalid-feedback" *ngIf="password?.errors?.['required']">Required</span>
-                <span class="invalid-feedback" *ngIf="password?.errors?.['minlength'] || password?.errors?.['maxlength']">
+                <span
+                    class="invalid-feedback"
+                    *ngIf="password?.errors?.['minlength'] || password?.errors?.['maxlength']"
+                >
                     Length must be between 6 and 30.
                 </span>
             </div>
@@ -48,7 +57,10 @@ export class PasswordControlComponent {
     }
 
     ngOnInit() {
-        this.parentFormGroup.addControl('password', new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]));
+        this.parentFormGroup.addControl(
+            'password',
+            new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(30)])
+        );
     }
 
     get password() {

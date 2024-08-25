@@ -3,10 +3,66 @@ import { Title } from '@angular/platform-browser';
 
 import { Todo, TodoStatus } from '../../types/common.types';
 import { TodoService } from '../../services/todo.service';
+import { CanUpdatePipe } from '../../pipes/can-update.pipe';
+import { NewTodoComponent } from '../../components/new-todo/new-todo.component';
+import { CommonModule } from '@angular/common';
+import { ShareModalComponent } from '../../components/share-modal/share-modal.component';
+import { TodoDetailModalComponent } from '../../components/todo-detail-modal/todo-detail-modal.component';
 
 @Component({
     selector: 'app-todos',
-    templateUrl: './todos.component.html',
+    standalone: true,
+    imports: [CanUpdatePipe, NewTodoComponent, CommonModule, ShareModalComponent, TodoDetailModalComponent],
+    template: `
+        <app-new-todo (newItemEvent)="getTodos($event)"></app-new-todo>
+        <div class="mt-3">
+            <ul class="container" style="height: 67vh; overflow-y: auto" *ngIf="todos.length">
+                <li *ngFor="let todo of todos" class="row bg-white border align-items-center">
+                    <span class="col-2">
+                        <button
+                            [disabled]="!(todo.permissions | canUpdate)"
+                            class="btn"
+                            style="border: none"
+                            (click)="toggleTodoDone(todo)"
+                        >
+                            <i
+                                class="bi text-success"
+                                [ngClass]="todo.status === 'done' ? 'bi-check-square-fill' : 'bi-square'"
+                                style="font-size: 1.5rem"
+                            ></i>
+                        </button>
+                    </span>
+                    <div
+                        (click)="openDetailModal(todo)"
+                        class="col-10 mt-3"
+                        [style]="{
+                            'text-decoration': todo.status === 'done' ? 'line-through' : 'initial',
+                            cursor: 'pointer'
+                        }"
+                    >
+                        <h3
+                            class="h5"
+                            [style]="{ 'text-decoration': todo.status === 'done' ? 'line-through' : 'initial' }"
+                        >
+                            {{ todo.title }}
+                        </h3>
+                        <pre class="text-muted">{{ todo.detail }}</pre>
+                    </div>
+                </li>
+            </ul>
+            <p *ngIf="!todos.length" class="text-center mt-5">No Todo</p>
+        </div>
+        <app-share-modal
+            [activeTodoId]="activeTodoId"
+            *ngIf="shareModalVisible && activeTodoId"
+            (closeModalEvent)="closeShareModal()"
+        ></app-share-modal>
+        <app-todo-detail-modal
+            [todo]="activeTodo"
+            *ngIf="detailModalVisible && activeTodo"
+            (closeModalEvent)="closeDetailModal()"
+        ></app-todo-detail-modal>
+    `,
 })
 export class TodosComponent implements OnInit {
     todos: Todo[] = [];

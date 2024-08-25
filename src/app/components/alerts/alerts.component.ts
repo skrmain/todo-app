@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { AlertService } from '../../services/alerts.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-alerts',
+    standalone: true,
+    imports: [CommonModule],
     template: `
         <div class="alert-container position-absolute">
             <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngFor="let error of errors">
@@ -25,8 +28,9 @@ import { AlertService } from '../../services/alerts.service';
 })
 export class AlertsComponent {
     errors?: string[] = [];
-    constructor(readonly alertService: AlertService) {
-        alertService.alerts$.subscribe({
+    readonly alertService = inject(AlertService);
+    constructor() {
+        this.alertService.alerts$.subscribe({
             next: (value) => {
                 this.errors?.push(value);
             },

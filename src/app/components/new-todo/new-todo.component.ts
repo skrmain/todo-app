@@ -1,10 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { TodoService } from '../../services/todo.service';
 
 @Component({
     selector: 'app-new-todo',
+    standalone: true,
+    imports: [ReactiveFormsModule],
     template: `
         <form [formGroup]="todoForm" (submit)="addTodo()">
             <div class="form-control d-flex flex-column">

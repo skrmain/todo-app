@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
+
 import { AuthGuard } from './auth.guard';
 
 import { LoginComponent } from './pages/login/login.component';
-import { TodosComponent } from './pages/todos/todos.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { TodosComponent } from './pages/todos/todos.component';
 
-const routes: Routes = [
+export const routes: Routes = [
     {
         path: '',
         redirectTo: 'todos',
@@ -32,9 +32,3 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
 ];
-
-@NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
-})
-export class AppRoutingModule {}

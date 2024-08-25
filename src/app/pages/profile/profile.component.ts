@@ -3,9 +3,12 @@ import { Title } from '@angular/platform-browser';
 
 import { UserService } from '../../services/user.service';
 import { UserProfile } from '../../types/common.types';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-profile',
+    standalone: true,
+    imports: [CommonModule],
     template: `
         <h2 class="text-center">My Profile</h2>
         <div class="row mt-5" *ngIf="user">

@@ -1,8 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ControlContainer, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ControlContainer, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-email-control',
+    standalone: true,
+    imports: [CommonModule, ReactiveFormsModule],
     template: `
         <div class="form-group mt-2">
             <label for="email" class="form-label">Email</label>
@@ -10,7 +13,10 @@ import { ControlContainer, FormControl, FormGroup, Validators } from '@angular/f
                 type="email"
                 id="email"
                 class="form-control"
-                [ngClass]="{ 'is-invalid': email?.touched && email?.errors, 'is-valid': email?.touched && !email?.errors }"
+                [ngClass]="{
+                    'is-invalid': email?.touched && email?.errors,
+                    'is-valid': email?.touched && !email?.errors
+                }"
                 formControlName="email"
             />
             <div *ngIf="email?.touched">

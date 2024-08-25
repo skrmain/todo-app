@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-navbar',
+    imports: [CommonModule, RouterModule],
+    standalone: true,
     template: `
         <header class="navbar fixed-top navbar-expand navbar-dark bg-primary">
             <nav class="container flex-lg-nowrap">
@@ -33,8 +36,9 @@ import { AuthService } from '../../services/auth.service';
 export class NavbarComponent {
     title = document.title;
     isAuthenticated: boolean;
+    private readonly authService = inject(AuthService);
 
-    constructor(private readonly router: Router, private readonly authService: AuthService) {
+    constructor(private readonly router: Router) {
         this.isAuthenticated = this.authService.isAuthenticated();
     }
 

@@ -3,9 +3,16 @@ import { FormBuilder } from '@angular/forms';
 import { TodoService } from '../../services/todo.service';
 import { UserService } from '../../services/user.service';
 import { Todo, TodoStatus } from '../../types/common.types';
+import { CanUpdatePipe } from '../../pipes/can-update.pipe';
+import { CommonModule } from '@angular/common';
+import { CanDeletePipe } from '../../pipes/can-delete.pipe';
+import { CanSharePipe } from '../../pipes/can-share.pipe';
+import { ShareModalComponent } from '../share-modal/share-modal.component';
 
 @Component({
     selector: 'app-todo-detail-modal',
+    standalone: true,
+    imports: [CanUpdatePipe, CommonModule, CanDeletePipe, CanSharePipe, ShareModalComponent],
     template: `
         <div class="modal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">

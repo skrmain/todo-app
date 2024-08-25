@@ -1,7 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-submit-button',
+    standalone: true,
+    imports: [CommonModule, ReactiveFormsModule],
     template: `
         <p class="text-center mt-5">
             <button type="submit" class="btn btn-primary" [disabled]="invalid || loader">

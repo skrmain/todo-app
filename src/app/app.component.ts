@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { AlertsComponent } from './components/alerts/alerts.component';
 
 @Component({
     selector: 'app-root',
+    standalone: true,
+    imports: [NavbarComponent, AlertsComponent, RouterOutlet],
     template: `
         <app-navbar></app-navbar>
         <app-alerts></app-alerts>

@@ -1,20 +1,29 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ControlContainer, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ControlContainer, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-username-control',
+    standalone: true,
+    imports: [CommonModule, ReactiveFormsModule],
     template: `
         <div class="form-group">
             <label for="username" class="form-label">Username</label>
             <input
                 id="username"
                 class="form-control"
-                [ngClass]="{ 'is-invalid': username?.touched && username?.errors, 'is-valid': username?.touched && !username?.errors }"
+                [ngClass]="{
+                    'is-invalid': username?.touched && username?.errors,
+                    'is-valid': username?.touched && !username?.errors
+                }"
                 formControlName="username"
             />
             <div *ngIf="username?.touched">
                 <span class="invalid-feedback" *ngIf="username?.errors?.['required']">Required</span>
-                <span class="invalid-feedback" *ngIf="username?.errors?.['minlength'] || username?.errors?.['maxlength']">
+                <span
+                    class="invalid-feedback"
+                    *ngIf="username?.errors?.['minlength'] || username?.errors?.['maxlength']"
+                >
                     Length must be between 5 and 20.
                 </span>
             </div>
@@ -35,7 +44,10 @@ export class UsernameControlComponent {
     }
 
     ngOnInit() {
-        this.parentFormGroup.addControl('username', new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]));
+        this.parentFormGroup.addControl(
+            'username',
+            new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)])
+        );
     }
 
     get username() {

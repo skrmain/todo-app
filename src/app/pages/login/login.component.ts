@@ -1,13 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '../../services/auth.service';
 import { AlertService } from '../../services/alerts.service';
+import { EmailControlComponent } from '../../components/email-control/email-control.component';
+import { PasswordControlComponent } from '../../components/password-control/password-control.component';
+import { SubmitButtonComponent } from '../../components/submit-button/submit-button.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-login',
+    standalone: true,
+    imports: [
+        ReactiveFormsModule,
+        EmailControlComponent,
+        PasswordControlComponent,
+        SubmitButtonComponent,
+        CommonModule,
+    ],
     template: `
         <h2 class="text-center p-3">Login, here</h2>
         <form [formGroup]="loginForm" (submit)="loginUser()">
