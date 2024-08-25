@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,8 +31,7 @@ import { CanDeletePipe } from './pipes/can-delete.pipe';
 import { ShareModalComponent } from './components/share-modal/share-modal.component';
 import { TodoDetailModalComponent } from './components/todo-detail-modal/todo-detail-modal.component';
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         AppComponent,
         LoginComponent,
         SignupComponent,
@@ -52,8 +51,7 @@ import { TodoDetailModalComponent } from './components/todo-detail-modal/todo-de
         ShareModalComponent,
         TodoDetailModalComponent,
     ],
-    imports: [BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule],
-    providers: [
+    bootstrap: [AppComponent], imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule], providers: [
         AuthService,
         AuthGuard,
         TodoService,
@@ -62,7 +60,6 @@ import { TodoDetailModalComponent } from './components/todo-detail-modal/todo-de
             useClass: TokenInterceptorService,
             multi: true,
         },
-    ],
-    bootstrap: [AppComponent],
-})
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}
