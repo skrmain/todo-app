@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { TodoService } from 'src/app/services/todo.service';
+import { TodoService } from '../../services/todo.service';
 
 @Component({
     selector: 'app-new-todo',
@@ -20,11 +20,13 @@ import { TodoService } from 'src/app/services/todo.service';
 })
 export class NewTodoComponent {
     @Output() newItemEvent = new EventEmitter<string>();
-    todoForm = this.fb.group({
-        title: ['', [Validators.required, Validators.minLength(5)]],
-        detail: [''],
-    });
-    constructor(private fb: FormBuilder, private todoService: TodoService) {}
+    todoForm;
+    constructor(private fb: FormBuilder, private todoService: TodoService) {
+        this.todoForm = this.fb.group({
+            title: ['', [Validators.required, Validators.minLength(5)]],
+            detail: [''],
+        });
+    }
 
     addTodo() {
         const { title, detail } = this.todoForm.value;

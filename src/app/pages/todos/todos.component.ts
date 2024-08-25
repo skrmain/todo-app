@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
-import { Todo, TodoStatus } from 'src/app/types/common.types';
+import { Todo, TodoStatus } from '../../types/common.types';
 import { TodoService } from '../../services/todo.service';
 
 @Component({

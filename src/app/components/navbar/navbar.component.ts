@@ -32,9 +32,11 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarComponent {
     title = document.title;
-    isAuthenticated = this.authService.isAuthenticated();
+    isAuthenticated: boolean;
 
-    constructor(private readonly router: Router, private readonly authService: AuthService) {}
+    constructor(private readonly router: Router, private readonly authService: AuthService) {
+        this.isAuthenticated = this.authService.isAuthenticated();
+    }
 
     logoutUser() {
         this.authService.logoutUser();

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '../../services/auth.service';
-import { AlertService } from 'src/app/services/alerts.service';
+import { AlertService } from '../../services/alerts.service';
 
 @Component({
     selector: 'app-signup',
@@ -20,14 +20,16 @@ import { AlertService } from 'src/app/services/alerts.service';
 })
 export class SignupComponent implements OnInit {
     loader = false;
-    protected signupForm = this.fb.group({});
+    protected signupForm;
     constructor(
         private fb: FormBuilder,
         private authService: AuthService,
         private router: Router,
         private title: Title,
         private readonly alertService: AlertService
-    ) {}
+    ) {
+        this.signupForm = this.fb.group({});
+    }
 
     ngOnInit() {
         this.title.setTitle('SignUp | TodoApp');

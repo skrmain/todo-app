@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { TodoService } from 'src/app/services/todo.service';
-import { UserService } from 'src/app/services/user.service';
-import { Todo, TodoStatus } from 'src/app/types/common.types';
+import { TodoService } from '../../services/todo.service';
+import { UserService } from '../../services/user.service';
+import { Todo, TodoStatus } from '../../types/common.types';
 
 @Component({
     selector: 'app-todo-detail-modal',
@@ -12,7 +12,13 @@ import { Todo, TodoStatus } from 'src/app/types/common.types';
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Share Todo</h5>
-                        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button
+                            type="button"
+                            (click)="closeModal()"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
                     </div>
                     <div class="modal-body">
                         <div *ngIf="todo" class="row bg-white border align-items-center">
@@ -21,7 +27,11 @@ import { Todo, TodoStatus } from 'src/app/types/common.types';
                                     [disabled]="!(todo.permissions | canUpdate)"
                                     class="btn m-0 p-0"
                                     style="border: none"
-                                    (click)="todo.status === 'done' ? markUnDone(todo._id, todo.title) : markDone(todo._id, todo.title)"
+                                    (click)="
+                                        todo.status === 'done'
+                                            ? markUnDone(todo._id, todo.title)
+                                            : markDone(todo._id, todo.title)
+                                    "
                                 >
                                     <i
                                         class="bi text-success"
@@ -30,8 +40,14 @@ import { Todo, TodoStatus } from 'src/app/types/common.types';
                                     ></i>
                                 </button>
                             </span>
-                            <div class="col-9 my-2" [style]="{ 'text-decoration': todo.status === 'done' ? 'line-through' : 'initial' }">
-                                <h3 class="h5" [style]="{ 'text-decoration': todo.status === 'done' ? 'line-through' : 'initial' }">
+                            <div
+                                class="col-9 my-2"
+                                [style]="{ 'text-decoration': todo.status === 'done' ? 'line-through' : 'initial' }"
+                            >
+                                <h3
+                                    class="h5"
+                                    [style]="{ 'text-decoration': todo.status === 'done' ? 'line-through' : 'initial' }"
+                                >
                                     {{ todo.title }}
                                 </h3>
                                 <pre class="text-muted">{{ todo.detail }}</pre>

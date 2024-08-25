@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
-import { UserService } from 'src/app/services/user.service';
-import { UserProfile } from 'src/app/types/common.types';
+import { UserService } from '../../services/user.service';
+import { UserProfile } from '../../types/common.types';
 
 @Component({
     selector: 'app-profile',

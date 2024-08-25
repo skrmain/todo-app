@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { TodoService } from 'src/app/services/todo.service';
-import { UserService } from 'src/app/services/user.service';
-import { SearchUser } from 'src/app/types/common.types';
+import { TodoService } from '../../services/todo.service';
+import { UserService } from '../../services/user.service';
+import { SearchUser } from '../../types/common.types';
 
 @Component({
     selector: 'app-share-modal',
@@ -12,7 +12,13 @@ import { SearchUser } from 'src/app/types/common.types';
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Share Todo</h5>
-                        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button
+                            type="button"
+                            (click)="closeModal()"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
                     </div>
                     <div class="modal-body">
                         <form [formGroup]="searchForm" (submit)="searchUser()">
@@ -24,7 +30,10 @@ import { SearchUser } from 'src/app/types/common.types';
                             <p
                                 *ngFor="let user of searchedUsers"
                                 class="btn d-block"
-                                [ngClass]="{ 'btn-outline-primary': user._id !== selectedUserId, 'btn-primary': user._id === selectedUserId }"
+                                [ngClass]="{
+                                    'btn-outline-primary': user._id !== selectedUserId,
+                                    'btn-primary': user._id === selectedUserId
+                                }"
                                 (click)="selectUser(user._id)"
                             >
                                 {{ user.username }}
@@ -44,13 +53,15 @@ import { SearchUser } from 'src/app/types/common.types';
 export class ShareModalComponent {
     @Input() activeTodoId?: string;
     @Output() closeModalEvent = new EventEmitter<boolean>();
-    searchForm = this.fb.group({
-        username: ['', [Validators.required]],
-    });
+    searchForm;
     searchedUsers: SearchUser[] = [];
     selectedUserId: string | undefined;
 
-    constructor(private fb: FormBuilder, private todoService: TodoService, private userService: UserService) {}
+    constructor(private fb: FormBuilder, private todoService: TodoService, private userService: UserService) {
+        this.searchForm = this.fb.group({
+            username: ['', [Validators.required]],
+        });
+    }
     searchUser() {
         const username = this.searchForm.get('username')?.value;
         console.log('S: ', username);
