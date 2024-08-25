@@ -10,25 +10,28 @@ import { TodosComponent } from './pages/todos.component';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'todos',
-        pathMatch: 'full',
-    },
-    {
-        path: 'todos',
         component: TodosComponent,
         canActivate: [AuthGuard],
+        title: 'TodoApp',
     },
     {
         path: 'login',
         component: LoginComponent,
+        title: 'TodoApp | Login',
     },
     {
         path: 'signup',
         component: SignupComponent,
+        title: 'TodoApp | Signup',
     },
     {
         path: 'profile',
         component: ProfileComponent,
         canActivate: [AuthGuard],
+        title: 'TodoApp | Profile',
+    },
+    {
+        path: '**',
+        redirectTo: '/',
     },
 ];

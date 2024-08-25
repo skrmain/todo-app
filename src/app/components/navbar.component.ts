@@ -11,36 +11,34 @@ import { AuthService } from '../services/auth.service';
     template: `
         <header class="navbar fixed-top navbar-expand navbar-dark bg-primary">
             <nav class="container flex-lg-nowrap">
-                <a class="navbar-brand">{{ title }}</a>
+                <a class="navbar-brand">TodoApp</a>
                 <ul class="navbar-nav ml-auto w-100 pe-3">
-                    <li class="nav-item ml-2" *ngIf="!isAuthenticated">
-                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/login']">Login</a>
-                    </li>
-                    <li class="nav-item ml-2" *ngIf="!isAuthenticated">
-                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/signup']">Signup</a>
-                    </li>
-                    <li class="nav-item ml-2" *ngIf="isAuthenticated">
+                    @if (authService.isAuthenticated()) {
+                    <li class="nav-item ml-2">
                         <a class="nav-link" routerLinkActive="active" [routerLink]="['/profile']">Profile</a>
                     </li>
-                    <li class="nav-item ml-2" *ngIf="isAuthenticated">
-                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/todos']">Todos</a>
+                    <li class="nav-item ml-2">
+                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/']">Todos</a>
                     </li>
-                    <li class="nav-item ms-auto" *ngIf="isAuthenticated">
+                    <li class="nav-item ms-auto">
                         <button class="btn btn-danger" (click)="logoutUser()">Logout</button>
                     </li>
+                    } @else {
+                    <li class="nav-item ml-2">
+                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/login']">Login</a>
+                    </li>
+                    <li class="nav-item ml-2">
+                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/signup']">Signup</a>
+                    </li>
+                    }
                 </ul>
             </nav>
         </header>
     `,
 })
 export class NavbarComponent {
-    title = document.title;
-    isAuthenticated: boolean;
-    private readonly authService = inject(AuthService);
-
-    constructor(private readonly router: Router) {
-        this.isAuthenticated = this.authService.isAuthenticated();
-    }
+    readonly authService = inject(AuthService);
+    constructor(private readonly router: Router) {}
 
     logoutUser() {
         this.authService.logoutUser();

@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '../services/auth.service';
 import { AlertService } from '../services/alerts.service';
@@ -30,21 +29,16 @@ import { SubmitButtonComponent } from '../components/submit-button.component';
         </form>
     `,
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
     loader = false;
     protected signupForm;
     constructor(
         private fb: FormBuilder,
         private authService: AuthService,
         private router: Router,
-        private title: Title,
         private readonly alertService: AlertService
     ) {
         this.signupForm = this.fb.group({});
-    }
-
-    ngOnInit() {
-        this.title.setTitle('SignUp | TodoApp');
     }
 
     signupUser() {

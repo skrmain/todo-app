@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
 import { UserService } from '../services/user.service';
@@ -24,10 +23,9 @@ import { UserProfile } from '../types/common.types';
 })
 export class ProfileComponent implements OnInit {
     user?: UserProfile;
-    constructor(private userService: UserService, private title: Title) {}
+    constructor(private userService: UserService) {}
 
     ngOnInit() {
-        this.title.setTitle('Profile | TodoApp');
         this.getUserDetail();
     }
 

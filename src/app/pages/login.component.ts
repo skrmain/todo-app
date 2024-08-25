@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
 import { AuthService } from '../services/auth.service';
@@ -29,21 +28,16 @@ import { SubmitButtonComponent } from '../components/submit-button.component';
         </form>
     `,
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
     loader = false;
     protected loginForm;
     constructor(
-        private fb: FormBuilder,
-        private authService: AuthService,
-        private router: Router,
-        private title: Title,
+        private readonly fb: FormBuilder,
+        private readonly authService: AuthService,
+        private readonly router: Router,
         private readonly alertService: AlertService
     ) {
         this.loginForm = this.fb.group({});
-    }
-
-    ngOnInit() {
-        this.title.setTitle('Login | TodoApp');
     }
 
     loginUser() {

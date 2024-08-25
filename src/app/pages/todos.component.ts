@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Title } from '@angular/platform-browser';
 
 import { Todo, TodoStatus } from '../types/common.types';
 import { TodoService } from '../services/todo.service';
@@ -71,9 +70,8 @@ export class TodosComponent implements OnInit {
     activeTodoId: string | undefined;
     activeTodo?: Todo;
 
-    constructor(private todoService: TodoService, private title: Title) {}
+    constructor(private todoService: TodoService) {}
     ngOnInit() {
-        this.title.setTitle('Todos | TodoApp');
         this.getTodos();
     }
 
